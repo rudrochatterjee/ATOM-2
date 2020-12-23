@@ -1,0 +1,26 @@
+{
+  "name": "atom-2",
+  "version": "2.0.0",
+  "description": "it will sing a song and makeing memes",
+  "main": "Index.js",
+  "scripts": {
+    "test": "Ping"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Priyonathchatterjee/ATOM-2.git"
+  },
+  "keywords": [
+    "A"
+  ],
+  "author": "Rudro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Priyonathchatterjee/ATOM-2/issues"
+  },
+  "homepage": "https://github.com/Priyonathchatterjee/ATOM-2#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "imageapi.js": "^1.3.0"
+  }
+}

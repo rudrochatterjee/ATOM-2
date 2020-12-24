@@ -1,30 +1,45 @@
 const Discord = require('discord.js');
-const bot = new Discord.Client();
+const client = new Discord.Client();
 const config = require("./config.json");
 const api = require("imageapi.js")
-bot.on('ready', message =>{
+const ytdl = require("ytdl-core")
+client.on('ready', message =>{
     console.log('music bot is on')
 })
+const prefix = config.prefix;
+client.on('message', async message =>{
+    if(message.author.bot) return
+    if(!message.content.startsWith(prefix)) return
 
-bot.on("message", async message => {
-    if(message.author.bot || message.channel.type === "dm") return;
+    const args = message.content.substring(config.prefix.length).split(" ")
 
-    let prefix = config.prefix ;
-    let messageArray = message.content.split(" ");
-    let cmd = messageArray[0];
-    let args = messageArray.slice(1);
+    if(message.content.substring(`${prefix}play`)){
+        const vc = message.member.voice.channel
+        if(!vc) return message.channel.send('you need to join a vc to play song')
+        const perm = vc.permissionsFor(message.client.user)
+        if(!perm.has("CONNECT")) return message.channel.send("i dont have permission to connect")
+        if(!perm.has('SPEAK')) return message.channel.send("i dont have permission to speak")
 
+        try{
+           var connection = await vc.join()
+        } catch (error) {
+           console.log(` There was an error to join the channel : ${error}`)
+           return message.channel.send(`There was an error to join the channel : ${error}`)
+        }
 
-    if(cmd === `${prefix}meme`){
-    let subreddits = ["comedyheaven", "dank", "meme", "memes"];
-    let subreddit = subreddits[Math.floor(Math.random() * subreddits.length)];
-    let img = await api(subreddit, true);
-    const Embed = new Discord.MessageEmbed()
-      .setTitle(`A meme from r/${subreddit}`)
-      .setURL(`https://reddit.com/r/${subreddit}`)
-      .setColor("RANDOM")
-      .setImage(img);
-       message.reply(Embed);
+        const dispatcher = connection.play(ytdl(args[1]))
+        .on('finish', () => {
+            vc.leave()
+        })
+        .on('error', error => {
+            console.log(error)
+        })
+        dispatcher.setVolumeLogarithmic(5 / 5)
+    }else if(message.content.startsWith(`${prefix}stop`)){
+        if(!message.member.voice.channel) return message.channel.send('you need to be in a vc to stop the music')
+        message.member.voice.channel.leave()
+        return undefined
     }
 })
-bot.login(config.token)
+
+client.login(config.token)

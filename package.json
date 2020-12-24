@@ -1,28 +1,21 @@
 {
-  "name": "atom-2",
-  "version": "2.0.0",
-  "description": "it will sing a song and makeing memes",
-  "main": "Index.js",
+  "name": "discordbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "Ping"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Priyonathchatterjee/ATOM-2.git"
-  },
-  "keywords": [
-    "A"
-  ],
-  "author": "Rudro",
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Priyonathchatterjee/ATOM-2/issues"
-  },
-  "homepage": "https://github.com/Priyonathchatterjee/ATOM-2#readme",
   "dependencies": {
-    "discord.js": "^12.5.1",
-    "imageapi.js": "^1.3.0",
+    "async_hooks": "^1.0.0",
+    "discord.js": "^12.4.0",
+    "lyrics-finder": "^21.4.0",
     "opusscript": "0.0.7",
-    "ytdl-core": "^4.2.1"
+    "vm": "^0.1.0",
+    "ytdl-core": "^4.2.1",
+    "ytpl": "^2.0.4",
+    "ytsearcher": "^1.2.3"
   }
 }

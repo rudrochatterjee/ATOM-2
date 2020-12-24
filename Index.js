@@ -36,9 +36,8 @@ client.on('message', async message =>{
         })
         dispatcher.setVolumeLogarithmic(5 / 5)
     }else if(message.content.startsWith(`${prefix}stop`)){
-        if(!message.member.voice.channel) return message.channel.send('you need to be in a vc to stop the music') .then(m => {
+        if(!message.member.voice.channel) return message.channel.send('you need to be in a vc to stop the music') 
         message.member.voice.channel.leave()
-    })
         return undefined
     }
 })

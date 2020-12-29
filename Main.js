@@ -29,7 +29,7 @@ fs.readdir("./commands/", (e, f) => {
     })
 })
 
-
+const config = require("./config.json")
 
 const queue = new Map();
 
@@ -50,7 +50,7 @@ client.on("guildMemberAdd", member => {
 
 
 client.on("message", async(message) => {
-    const prefix = '!!';
+    const prefix = config.prefix;
 
     if(!message.content.startsWith(prefix)) return
     
@@ -69,6 +69,6 @@ client.on("message", async(message) => {
         
 })
 
-const token = "NzkxMjc5NzM2NTExNzkxMTY1.X-M2rg.V08BoWY2-VmGdqvCDHlIfYBv3yM"
+const token = config.token;
 
 client.login(token)
